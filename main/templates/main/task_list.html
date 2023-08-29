@@ -1,11 +1,11 @@
 {% extends 'main/main.html' %} 
 {% block content %}
+{% load custom_filters %}
 
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 <div class="header-bar">
     <div>
-        <h1>Привет, {{request.user|title}}</h1>
-        <h3 style="margin:0">Вы имеете {{count}} задач</h3>
+        <h1 style="margin-bottom: 5px;">Привет, {{request.user|title}}</h1>
     </div>
 
     {% if request.user.is_authenticated %}
@@ -13,10 +13,15 @@
     <a href="{% url 'login' %}">Авторизоваться</a> {% endif %}
 </div>
 
+<div class="count-task">
+    <h3 style="margin:0">Вы имеете {{ count }} задач{{ count|tasks_suffix }}</h3>
+    <a href="{% url 'category-add' %}">Создать/Изменить категорию</a>
+</div>
+
 
 <div id="search-add-wrapper">
     <form method="GET" style="display: flex;">
-        <input type='text' name='search-area' placeholder="Найдите вашу задачу: " value="{{search_input}}">
+        <input class="search-task" type='text' name='search-area' placeholder="Найдите вашу задачу: " value="{{search_input}}">
         <input class="button" type="submit" value='Найти'>
     </form>
     {% if tasks|length > 0 %}

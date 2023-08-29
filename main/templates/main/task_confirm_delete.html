@@ -10,6 +10,7 @@
         {% csrf_token %}
         <p>Вы уверены, что хотите удалить эту задачу? <b>"{{task}}"</b> </p>
         <input style="margin-left: 0px;" class="button" type="submit" value="Удалить" />
+        <a style="padding-left: 10px;" href="{% url 'tasks' %}">Отмена</a>
     </form>
 </div>
 
